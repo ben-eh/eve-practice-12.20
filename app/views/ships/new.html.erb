@@ -1,0 +1,16 @@
+<h1>Add a new ship</h1>
+
+<%= form_for @ship do |x| %>
+
+  <%= x.label :Name %>
+  <%= x.text_field :name %>
+
+  <%= x.label :Class %>
+  <%= x.text_field   :s_class %>
+
+  <%= x.label :Notes %>
+  <%= x.text_field :notes %>
+
+  <%= x.submit %>
+
+<% end %>

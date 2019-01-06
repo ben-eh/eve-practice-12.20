@@ -1,0 +1,19 @@
+<h1>List of Ships</h1>
+
+<form action="/ships" method="get">
+  <input type="text" name="s_class" placeholder="Which ship class?">
+  <input type="submit">
+</form>
+
+<br>
+<br>
+
+<ul>
+  <% @ships.each do |ship| %>
+    <%= link_to ship_path(ship) do %>
+      <li><%= ship[:name] %></li>
+    <% end %>
+  <% end %>
+</ul>
+
+<%= link_to "Add new ship", new_ship_path %>
