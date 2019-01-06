@@ -2,11 +2,14 @@ class ShipsController < ApplicationController
   before_action :set_ship, only: [:show, :destroy]
 
   def index
-    # raise
-    @ships = Ship.all.select do |ship|
-      ship[:s_class] == params[:s_class]
+    if params[:s_class].exist?
+      @ships = Ship.all
+    else
+      @ships = Ship.all.select do |ship|
+        ship[:s_class] == params[:s_class]
+      end
     end
-    raise
+    # raise
   end
 
   def new
