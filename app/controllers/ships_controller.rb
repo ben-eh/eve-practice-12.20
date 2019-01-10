@@ -2,14 +2,13 @@ class ShipsController < ApplicationController
   before_action :set_ship, only: [:show, :destroy]
 
   def index
-    if params[:s_class].exist?
-      @ships = Ship.all
+    if params[:s_class.downcase].present?
+      @ships = Ship.where(s_class: params[:s_class])
     else
-      @ships = Ship.all.select do |ship|
-        ship[:s_class] == params[:s_class]
-      end
+      @ships = Ship.all
     end
     # raise
+    # @ships = Ship.where(s_class: "Frigate")
   end
 
   def new
@@ -23,6 +22,12 @@ class ShipsController < ApplicationController
   end
 
   def show
+  end
+
+  def destroy
+    @ship = Ship.find(params[:id])
+    @ship.destroy
+    redirect_to ships_path
   end
 
   # def frigates
