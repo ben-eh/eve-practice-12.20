@@ -24,6 +24,13 @@ class ShipsController < ApplicationController
   def show
   end
 
+  def edit
+  end
+
+  def update
+    @ship = Ship.find(params[:id])
+  end
+
   def destroy
     @ship = Ship.find(params[:id])
     @ship.destroy
