@@ -2,11 +2,13 @@ class ShipsController < ApplicationController
   before_action :set_ship, only: [:show, :destroy]
 
   def index
-    if params[:s_class.downcase].present?
-      @ships = Ship.where(s_class: params[:s_class])
-    else
-      @ships = Ship.all
-    end
+    @ships = Ship.all
+    # if params[:s_class].exist?
+      # @ships = Ship.where(s_class: params[:s_class])
+    #   @ships = Ship.where(s_class: "frigate")
+    # else
+    #   @ships = Ship.all
+    # end
     # raise
     # @ships = Ship.where(s_class: "Frigate")
   end
