@@ -2,6 +2,7 @@ class ShipsController < ApplicationController
   before_action :set_ship, only: [:show, :destroy]
 
   def index
+    ship_classes = Ship.pluck(:s_class)
     @ships = Ship.all
     # if params[:s_class].exist?
       # @ships = Ship.where(s_class: params[:s_class])
@@ -9,7 +10,12 @@ class ShipsController < ApplicationController
     # else
     #   @ships = Ship.all
     # end
-    # raise
+
+    # This works to downcase the s_class from params to check
+    check = params[:s_class].downcase
+    params_match = ship_classes.include?(check)
+    # Need raise because errors go up with local variables if I leave them there
+    raise
     # @ships = Ship.where(s_class: "Frigate")
   end
 
