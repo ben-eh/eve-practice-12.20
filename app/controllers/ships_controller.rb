@@ -3,7 +3,15 @@ class ShipsController < ApplicationController
 
   def index
     ship_classes = Ship.pluck(:s_class)
-    @ships = Ship.all
+    proper_class_downcase = params[:s_class].try(:downcase)
+    if ship_classes.include?(proper_class_downcase)
+      @ships = Ship.where(s_class: proper_class_downcase)
+    else
+      @ships = Ship.all
+    end
+
+    # params_match = ship_classes.include?(check)
+    # @ships = Ship.all
     # if params[:s_class].exist?
       # @ships = Ship.where(s_class: params[:s_class])
     #   @ships = Ship.where(s_class: "frigate")
@@ -12,10 +20,8 @@ class ShipsController < ApplicationController
     # end
 
     # This works to downcase the s_class from params to check
-    check = params[:s_class].downcase
-    params_match = ship_classes.include?(check)
     # Need raise because errors go up with local variables if I leave them there
-    raise
+    # raise
     # @ships = Ship.where(s_class: "Frigate")
   end
 
